@@ -5,6 +5,7 @@
 
 #include "ecs.h"
 #include "array_stack.h"
+#include "../log.h"
 
 #define INITIAL_CAPACITY 32
 
@@ -82,7 +83,7 @@ ecs_create()
 			void *new_data = realloc(state.component_store.data, state.component_store.cap * 2 * state.component_store.size);
 			uint32_t *new_query_result_list = realloc(state.query_result.list, state.entity_store.cap * 2 * sizeof(uint32_t));
 			if (NULL == new_flag_array || NULL == new_mask_array || NULL == new_data || NULL == new_query_result_list) {
-				printf("Realloc fail %s:%d\n", __FILE__, __LINE__);
+				loge("Realloc fail %s:%d\n", __FILE__, __LINE__);
 				exit(1);
 			} else {
 				state.entity_store.flag_array = new_flag_array;
