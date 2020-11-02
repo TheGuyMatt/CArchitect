@@ -1,7 +1,7 @@
 #include "window.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
-#include "log.h"
+#include "util/log.h"
 
 SDL_Window *sdl_window = NULL;
 SDL_Renderer *sdl_renderer = NULL;

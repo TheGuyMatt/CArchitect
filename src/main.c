@@ -1,5 +1,5 @@
-#include "log.h"
-#include "ECS/ecs.h"
+#include "util/log.h"
+#include "ecs/ecs.h"
 #include "window.h"
 
 int main(int argc, char **argv)
