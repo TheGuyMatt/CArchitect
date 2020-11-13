@@ -1,6 +1,7 @@
 #include "window.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_image.h>
 #include "util/log.h"
 
 SDL_Window *sdl_window = NULL;
@@ -13,6 +14,13 @@ int window_create(char title[], int width, int height)
   if (SDL_Init(SDL_INIT_VIDEO) != 0)
   {
     loge("Failed to initialize SDL_Video");
+    return 1;
+  }
+
+  //initialize SDL_image
+  if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
+  {
+    loge("Failed to initialize SDL_image");
     return 1;
   }
 
@@ -41,6 +49,7 @@ void window_quit()
 {
   SDL_DestroyRenderer(sdl_renderer);
   SDL_DestroyWindow(sdl_window);
+  IMG_Quit();
   SDL_Quit();
 }
 
