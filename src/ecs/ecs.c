@@ -4,7 +4,7 @@
 #include <inttypes.h>
 
 #include "ecs.h"
-#include "array_stack.h"
+#include "../data_structures/array_stack.h"
 #include "../util/log.h"
 
 #define INITIAL_CAPACITY 32

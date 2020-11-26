@@ -3,6 +3,12 @@
 
 int texture_load(Texture *texture, SDL_Renderer *renderer, char filename[])
 {
+  if (texture == NULL)
+  {
+    loge("Bad texture passed to texture_load");
+    return 1;
+  }
+
   if (renderer == NULL)
   {
     loge("Bad renderer passed to texture_load");
