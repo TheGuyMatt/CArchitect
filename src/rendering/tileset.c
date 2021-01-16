@@ -7,13 +7,13 @@ int tileset_load(Tileset* tileset, Texture* texture, int tile_width, int tile_he
   if (tileset == NULL)
   {
     loge("Bad tileset passed to tileset_load");
-    return 1;
+    return 0;
   }
 
   if (texture == NULL)
   {
     loge("Bad texture passed to tileset_load");
-    return 1;
+    return 0;
   }
 
   tileset->texture = texture;
@@ -23,6 +23,8 @@ int tileset_load(Tileset* tileset, Texture* texture, int tile_width, int tile_he
   tileset->tile_height = tile_height;
   tileset->tiles_col = tileset->width / tileset->tile_width;
   tileset->tiles_row = tileset->height / tileset->tile_height;
+
+  return 1;
 }
 
 //render tileset at given position and column and row with default width and height

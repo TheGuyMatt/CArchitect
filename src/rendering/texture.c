@@ -6,13 +6,13 @@ int texture_load(Texture *texture, SDL_Renderer *renderer, char filename[])
   if (texture == NULL)
   {
     loge("Bad texture passed to texture_load");
-    return 1;
+    return 0;
   }
 
   if (renderer == NULL)
   {
     loge("Bad renderer passed to texture_load");
-    return 1;
+    return 0;
   }
 
   texture->renderer_reference = renderer;
@@ -21,18 +21,18 @@ int texture_load(Texture *texture, SDL_Renderer *renderer, char filename[])
   if (tempSurface == NULL)
   {
     loge("Unable to load image: %s", filename);
-    return 1;
+    return 0;
   }
 
   if ((texture->sdl_texture = SDL_CreateTextureFromSurface(renderer, tempSurface)) == NULL)
   {
     loge("Unable to create texture");
-    return 1;
+    return 0;
   }
 
   SDL_QueryTexture(texture->sdl_texture, NULL, NULL, &texture->width, &texture->height);
   SDL_FreeSurface(tempSurface);
-  return 0;
+  return 1;
 }
 
 void texture_render_at_pos(Texture* texture, int x, int y)

@@ -6,7 +6,6 @@
 
 SDL_Window *sdl_window = NULL;
 SDL_Renderer *sdl_renderer = NULL;
-int window_closed = 0;
 
 int window_create(char title[], int width, int height)
 {
@@ -14,14 +13,14 @@ int window_create(char title[], int width, int height)
   if (SDL_Init(SDL_INIT_VIDEO) != 0)
   {
     loge("Failed to initialize SDL_Video");
-    return 1;
+    return 0;
   }
 
   //initialize SDL_image
   if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG)
   {
     loge("Failed to initialize SDL_image");
-    return 1;
+    return 0;
   }
 
   //create the window
@@ -29,7 +28,7 @@ int window_create(char title[], int width, int height)
   if (sdl_window == NULL)
   {
     loge("Failed to create window");
-    return 1;
+    return 0;
   }
 
   //create renderer
@@ -37,12 +36,10 @@ int window_create(char title[], int width, int height)
   if (sdl_renderer == NULL)
   {
     loge("Failed to create renderer");
-    return 1;
+    return 0;
   }
 
-  window_closed = 1;
-
-  return 0;
+  return 1;
 }
 
 void window_quit()

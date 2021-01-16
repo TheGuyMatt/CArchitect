@@ -9,9 +9,6 @@ extern SDL_Window *sdl_window;
 //the sdl renderer, which draws things to the screen
 extern SDL_Renderer *sdl_renderer;
 
-//sees if the window is closed
-extern int window_closed;
-
 //initializes window
 int window_create(char title[], int width, int height);
 
