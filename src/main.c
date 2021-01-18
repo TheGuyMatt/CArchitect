@@ -4,14 +4,20 @@
 #include "rendering/texture.h"
 #include "rendering/tileset.h"
 
+#include <SDL2/SDL_timer.h>
 #include <SDL_image.h>
 
 int game_running = 0;
+#define FPS 60
+#define FTT (1000 / FPS)
+int last_frame_time = 0;
 
 Texture skytexture;
 Texture pinetreetexture;
 Texture temptileset;
 Tileset realtileset;
+
+float groundx = 0;
 
 void setup()
 {
@@ -53,6 +59,13 @@ void process_input()
 //updates the game
 void update()
 {
+  while (!SDL_TICKS_PASSED(SDL_GetTicks(), last_frame_time + FTT));
+
+  float delta_time = (SDL_GetTicks() - last_frame_time) / 1000.0f;
+
+  last_frame_time = SDL_GetTicks();
+
+  groundx += 1280 * delta_time;
 }
 
 //renders to the screen
@@ -66,9 +79,9 @@ void draw()
   
   for (int i = 0; i < 1280 / 64; i++)
   {
-    tileset_render_at_pos_size(&realtileset, 1, 0, i * 64, 720 - 64 * 3, 64, 64);
-    tileset_render_at_pos_size(&realtileset, 0, 1, i * 64, 720 - 64 * 2, 64, 64);
-    tileset_render_at_pos_size(&realtileset, 0, 1, i * 64, 720 - 64, 64, 64);
+    tileset_render_at_pos_size(&realtileset, 1, 0, i * 64 + (int)groundx, 720 - 64 * 3, 64, 64);
+    tileset_render_at_pos_size(&realtileset, 0, 1, i * 64 + (int)groundx, 720 - 64 * 2, 64, 64);
+    tileset_render_at_pos_size(&realtileset, 0, 1, i * 64 + (int)groundx, 720 - 64, 64, 64);
   }
 
   window_present();
